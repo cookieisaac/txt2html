@@ -1,18 +1,8 @@
-import sys, re
-from util import lines, blocks
+import sys
+from handlers import HTMLRenderer
+from parser import BasicTextParser
 
-print('<html><head><title>...</title><body>')
+handler = HTMLRenderer()
+parser = BasicTextParser(handler)
 
-title = True
-for block in blocks(sys.stdin):
-    block = re.sub(r'\*(.+?)\*', r'<em>\1</em>', block)
-    if title:
-        print('<h1>')
-        print(block)
-        print('</h1>')
-        title = False
-    else:
-        print('<p>')
-        print(block)
-        print('</p>')
-print '</body></html>'
+parser.parse(sys.stdin)
