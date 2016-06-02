@@ -1,6 +1,6 @@
-import re
 from util import lines, blocks
 from rules import *
+from filters import *
 
 class Parser:
     """
@@ -14,9 +14,7 @@ class Parser:
     def addRule(self, rule):
         self.rules.append(rule)
         
-    def addFilter(self, pattern, name):
-        def filter(block, handler):
-            return re.sub(pattern, handler.sub(name), block)
+    def addFilter(self, filter):
         self.filters.append(filter)
         
         
@@ -25,7 +23,7 @@ class Parser:
         for block in blocks(file):
             #Update block with filter. eg: *this* to <em>this</em>
             for filter in self.filters:
-                block = filter(block, self.handler)
+                block = filter.filter(block, self.handler)
             for rule in self.rules:
                 if rule.condition(block):
                     last = rule.action(block, self.handler)
@@ -44,6 +42,8 @@ class BasicTextParser(Parser):
         self.addRule(HeadingRule())
         self.addRule(ParagraphRule())
         #Note '.+' is greedy whereas '.+?' is lazy/non-greedy
-        self.addFilter(r'\*(.+?)\*', 'emphasis')
+        self.addFilter(EmphasisFilter())
+        self.addFilter(UrlFilter())
+        self.addFilter(EmailFilter())
 
     

@@ -70,7 +70,12 @@ class HTMLRenderer(Handler):
         
     def sub_emphasis(self, match):
         return '<em>%s</em>' % match.group(1)
+
+    def sub_email(self, match):
+        return '<a href="mailto:%s">%s</a>' % (match.group(1), match.group(1)) 
         
+    def sub_url(self, match):
+        return '<a href="%s">%s</a>' % (match.group(1), match.group(1))
 
         
         
