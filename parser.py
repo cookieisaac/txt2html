@@ -36,7 +36,12 @@ class Parser:
 class BasicTextParser(Parser):
     def __init__(self, handler):
         Parser.__init__(self, handler)
-        #self.addRule(HeadingRule())
+        
+        #Note: The order of rules matters here. Only one rule will apply to a block
+        self.addRule(ListRule())
+        self.addRule(ListItemRule())
+        self.addRule(TitleRule())
+        self.addRule(HeadingRule())
         self.addRule(ParagraphRule())
         #Note '.+' is greedy whereas '.+?' is lazy/non-greedy
         self.addFilter(r'\*(.+?)\*', 'emphasis')

@@ -44,6 +44,30 @@ class HTMLRenderer(Handler):
     def end_paragraph(self):
         print('</p>')
         
+    def start_heading(self):
+        print('<h2>')
+        
+    def end_heading(self):
+        print('</h2>')
+        
+    def start_title(self):
+        print('<h1>')
+        
+    def end_title(self):
+        print('</h1>')
+        
+    def start_listitem(self):
+        print('<li>')
+        
+    def end_listitem(self):
+        print('</li>')
+        
+    def start_list(self):
+        print('<ul>')
+        
+    def end_list(self):
+        print('</ul>')
+        
     def sub_emphasis(self, match):
         return '<em>%s</em>' % match.group(1)
         
