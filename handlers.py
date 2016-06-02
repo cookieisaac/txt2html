@@ -1,7 +1,6 @@
 class Handler:
     def callback(self, prefix, name, *args):
         method_name = prefix + name
-        print method_name
         method = getattr(self, method_name, None)
         try:
             return method(*args)
@@ -22,13 +21,13 @@ class Handler:
                 match.group(0)
             return result
         return substitution
-	"""
-	An object that handles method calls from the Parser
-	
-	The implementation uses Visitor Pattern
-	"""
-	
-	
+    """
+    An object that handles method calls from the Parser
+    
+    The implementation uses Visitor Pattern
+    """
+    
+    
 class HTMLRenderer(Handler):        
     def feed(self, block):
         print(block)
@@ -38,15 +37,16 @@ class HTMLRenderer(Handler):
         
     def end_document(self):
         print('</body></html>')
-    
+        
     def start_paragraph(self):
         print('<p>')
-		
-	def end_paragraph(self):
-		print('</p>')
-		
-	def sub_emphasis(self, match):
-		return '<em>%s</em>' % match.group(1)
+        
+    def end_paragraph(self):
+        print('</p>')
+        
+    def sub_emphasis(self, match):
+        return '<em>%s</em>' % match.group(1)
+        
 
-		
-		
+        
+        

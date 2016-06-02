@@ -1,6 +1,5 @@
 class Rule:
     def action(self, block, handler):
-        print ("Action invoked for block: " + block + " with handler: " + str(handler))
         handler.start(self.type)
         handler.feed(block)
         handler.end(self.type)
