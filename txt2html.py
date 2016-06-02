@@ -1,6 +1,6 @@
 import sys
-from handlers import HTMLRenderer
-from parser import BasicTextParser
+from lib.handlers import HTMLRenderer
+from lib.parser import BasicTextParser
 
 handler = HTMLRenderer()
 parser = BasicTextParser(handler)

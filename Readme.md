@@ -1,5 +1,7 @@
 # txt2html
 
+Convert a txt file to html file
+
 ## Usage
 
 ```
