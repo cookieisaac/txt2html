@@ -1,0 +1,38 @@
+@startuml
+Parser "1" *-- "1" Handler
+Parser "1" *-- "many" Rule
+Parser "1" *-- "many" Filter
+Handler .. Filter
+Handler .. Rule
+
+Parser : parse()
+Parser : Rule[] rules
+Parser : Filter[] filters 
+Parser : Handler handler
+
+Handler : start(type)
+Handler : end(type)
+Handler : sub(pattern)
+Handler : -callback()
+
+Rule : action(block, handler)
+Rule : condition(block)
+Rule : type
+
+Filter : filter(block, handler)
+Filter : type
+Filter : pattern
+
+Rule <|-- HeadingRule
+Rule <|-- ListItemRule
+HeadingRule <|-- TitleRule
+ListItemRule <|-- ListRule
+
+Filter <|-- UrlFilter
+Filter <|-- EmphasisFilter
+Filter <|-- EmailFilter
+
+Handler <|-- HTMLRenderer
+
+Parser <|-- BasicTextParser
+@enduml
