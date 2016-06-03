@@ -47,11 +47,13 @@ $ python txt2html.py < input.txt > output.html
 
 ## High Level Design
 
+![alt tag](https://github.com/cookieisaac/txt2html/blob/master/misc/uml.png?raw=true)
+
 ### Lexical Analysis
 
 Token: block, lines
 
-`util`: to break things into block and lines
+`util`: to break things into block and lines (lexemes)
 
 ### Syntax Analysis
 
@@ -61,13 +63,11 @@ Syntax Rules: rules (conditions) and filters (regex)
 
 `filters`: syntax rules for within-block elements, e.g.: email, url, emphasis, etc.
 
-`parse`: token visitor
-
 ### Semantics Analysis
 
 Semantics: How to interpret each rule on a block
 
-`handlers`: handle rule action and filter 
+`handlers`: handle rule action and filter, using visitor pattern
 
 ### Interpreter
 
